@@ -1,12 +1,19 @@
 {
   "name": "videohub",
   "main": "node_modules/expo/AppEntry.js",
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest --watch --coverage=false",
+    "testFinal": "jest"
   },
   "dependencies": {
     "expo": "~37.0.3",
@@ -18,10 +25,33 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@testing-library/react-native": "^5.0.3",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
     "@types/react": "~16.9.23",
     "@types/react-native": "~0.61.17",
     "babel-preset-expo": "~8.1.0",
+    "husky": "^4.2.5",
+    "jest-expo": "^37.0.0",
+    "lint-staged": "^10.1.7",
+    "prettier": "^2.0.5",
     "typescript": "~3.8.3"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.config.ts"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "private": true
 }
