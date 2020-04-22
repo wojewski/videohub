@@ -1,5 +1,5 @@
 {
-  "name": "videohub",
+  "name": "app",
   "main": "node_modules/expo/AppEntry.js",
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json}": [
