@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, FlatList, ActivityIndicator } from "react-native";
+import { Text, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import { styles } from "./Home.styles";
 import { Colors } from "src/styles/colors";
 import { withVideos } from "./graphql/queries";
 import { Video } from "./types";
-import VideoItem from "src/components/VideoItem/VideoItem";
+import VideoTile from "src/components/VideoTile/VideoTile";
 
 interface Props {
   videos: Video[];
@@ -13,7 +13,7 @@ interface Props {
 
 function Home(props: Props) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {props.loading && props.videos && !props.videos.length ? (
         <ActivityIndicator testID="loader" size="large" color={Colors.white} />
       ) : (
@@ -23,11 +23,11 @@ function Home(props: Props) {
             testID="videoList"
             data={props.videos}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <VideoItem {...item} />}
+            renderItem={({ item }) => <VideoTile {...item} />}
           />
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
