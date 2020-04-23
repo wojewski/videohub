@@ -1,11 +1,44 @@
 import React from "react";
 import Home from "./Home";
-import { render } from "@testing-library/react-native";
+import { render, wait, act } from "@testing-library/react-native";
+import { MockedProvider } from "@apollo/react-testing";
+import videos from "src/mocks/videos.json";
+import { videosQuery } from "./graphql/queries";
+
+const mocks = [
+  {
+    request: {
+      query: videosQuery,
+    },
+    result: {
+      data: {
+        videos,
+        loading: false,
+      },
+    },
+  },
+];
+
+const shape = (
+  <MockedProvider mocks={mocks} addTypename={false}>
+    <Home />
+  </MockedProvider>
+);
 
 describe("Home", () => {
-  it("renders properly", () => {
-    const { getByTestId } = render(<Home />);
+  it("loader mounts and unmounts properly", async () => {
+    const { queryByTestId } = render(shape);
+    expect(queryByTestId("loader")).toBeDefined();
 
-    expect(getByTestId("home")).toBeDefined();
+    await act(wait);
+
+    expect(queryByTestId("loader")).toBe(null);
+  });
+
+  it("renders properly", async () => {
+    const { queryByTestId } = render(shape);
+
+    await act(wait);
+    expect(queryByTestId("videoList")).toBeDefined();
   });
 });

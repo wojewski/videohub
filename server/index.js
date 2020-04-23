@@ -1,8 +1,11 @@
-const { ApolloServer, gql } = require('apollo-server');
-const movies = require('./movies.json');
+const {
+  ApolloServer,
+  gql
+} = require('apollo-server');
+const videos = require('./videos.json');
 
-const typeDefs = gql`
-  type Movie {
+const typeDefs = gql `
+  type Video {
     id: String
     title: String
     description: String
@@ -11,16 +14,16 @@ const typeDefs = gql`
   }
 
   type Query {
-    movies: [Movie]
-    movie(id: ID!): Movie
+    videos: [Video]
+    video(id: ID!): Video
   }
 `;
 
 const resolvers = {
   Query: {
-    movies: () => movies,
-    movie: (parent, args) => {
-      return movies.find((movie) => movie.id === args.id);
+    videos: () => videos,
+    video: (parent, args) => {
+      return videos.find((video) => video.id === args.id);
     },
   },
 };
@@ -34,6 +37,8 @@ server
   .listen({
     port: 5000,
   })
-  .then(({ url }) => {
+  .then(({
+    url
+  }) => {
     console.log(`🚀  Server ready at ${url}`);
   });
