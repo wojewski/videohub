@@ -1,24 +1,34 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
+import { styles } from "./Home.styles";
 import { Colors } from "src/styles/colors";
+import { withVideos } from "./graphql/queries";
+import { Video } from "./types";
+import VideoItem from "src/components/VideoItem/VideoItem";
 
-export default function Home() {
+interface Props {
+  videos: Video[];
+  loading: boolean;
+}
+
+function Home(props: Props) {
   return (
-    <View testID="home" style={styles.container}>
-      <Text style={styles.text}>VideoHub</Text>
+    <View style={styles.container}>
+      {props.loading && props.videos && !props.videos.length ? (
+        <ActivityIndicator testID="loader" size="large" color={Colors.white} />
+      ) : (
+        <>
+          <Text style={styles.text}>VideoHub</Text>
+          <FlatList
+            testID="videoList"
+            data={props.videos}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <VideoItem {...item} />}
+          />
+        </>
+      )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.black,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: 30,
-    color: Colors.white,
-  },
-});
+export default withVideos(Home);
