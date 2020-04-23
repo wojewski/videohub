@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./Home";
+import Home from "./HomeScreen";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
 import videos from "src/mocks/videos.json";
@@ -25,7 +25,7 @@ const shape = (
   </MockedProvider>
 );
 
-describe("Home", () => {
+describe("HomeScreen", () => {
   it("loader mounts and unmounts properly", async () => {
     const { queryByTestId } = render(shape);
     expect(queryByTestId("loader")).toBeDefined();

@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { graphql, ChildDataProps } from "react-apollo";
-import { Video } from "../types";
+import { Video } from "src/types/types";
 
 export const videosQuery = gql`
   query {
