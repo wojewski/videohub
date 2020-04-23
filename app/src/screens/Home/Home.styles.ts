@@ -4,12 +4,15 @@ import { Colors } from "src/styles/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
-    alignItems: "center",
+    backgroundColor: Colors.white,
     justifyContent: "center",
   },
   text: {
     fontSize: 30,
-    color: Colors.white,
+    color: Colors.grey,
+    textAlign: "center",
+    marginTop: 10,
+    marginBottom: 5,
+    fontWeight: "bold",
   },
 });

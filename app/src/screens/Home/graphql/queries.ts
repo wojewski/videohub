@@ -7,9 +7,7 @@ export const videosQuery = gql`
     videos {
       id
       title
-      description
       thumbnail
-      url
     }
   }
 `;
