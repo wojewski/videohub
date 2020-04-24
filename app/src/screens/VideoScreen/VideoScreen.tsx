@@ -23,12 +23,10 @@ function VideoScreen(props: Props) {
             source={{
               uri: video.url,
             }}
-            rate={1.0}
-            volume={1.0}
             resizeMode="contain"
-            shouldPlay
             style={styles.video}
             useNativeControls
+            shouldPlay
           />
           <Text style={styles.title}>{video.title}</Text>
           <Text>{video.description}</Text>

@@ -1,9 +1,14 @@
 import React from "react";
-import Home from "./HomeScreen";
+import HomeScreen from "./HomeScreen";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
 import videos from "src/mocks/videos.json";
 import { videosQuery } from "./graphql/queries";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
 
 const mocks = [
   {
@@ -19,9 +24,15 @@ const mocks = [
   },
 ];
 
+jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
+
 const shape = (
   <MockedProvider mocks={mocks} addTypename={false}>
-    <Home />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   </MockedProvider>
 );
 

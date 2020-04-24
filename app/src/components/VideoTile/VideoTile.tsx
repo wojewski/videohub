@@ -15,8 +15,8 @@ interface Props extends Video {
 
 export default function VideoTile(props: Props) {
   return (
-    <TouchableOpacity onPress={props.onPress}>
-      <View style={styles.tile} testID="videoTile">
+    <TouchableOpacity testID="videoTile" onPress={props.onPress}>
+      <View style={styles.tile}>
         <Image
           source={{ uri: props.thumbnail }}
           style={styles.thumbnail}
