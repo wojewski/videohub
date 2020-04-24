@@ -20,6 +20,7 @@ function VideoScreen(props: Props) {
       ) : (
         <>
           <VideoPlayer
+            testID="videoPlayer"
             source={{
               uri: video.url,
             }}
@@ -28,8 +29,10 @@ function VideoScreen(props: Props) {
             useNativeControls
             shouldPlay
           />
-          <Text style={styles.title}>{video.title}</Text>
-          <Text>{video.description}</Text>
+          <Text testID="title" style={styles.title}>
+            {video.title}
+          </Text>
+          <Text testID="description">{video.description}</Text>
         </>
       )}
     </SafeAreaView>
