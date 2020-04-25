@@ -15,6 +15,7 @@ export const videosQuery = gql`
 export interface Response {
   videos: Video[];
   loading: boolean;
+  error?: Error;
 }
 
 type ChildProps = ChildDataProps<Response>;

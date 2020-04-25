@@ -52,4 +52,30 @@ describe("HomeScreen", () => {
     await act(wait);
     expect(queryByTestId("videoList")).toBeDefined();
   });
+
+  it("renders ErrorState component if an error happens", async () => {
+    const { getByTestId } = render(
+      <MockedProvider
+        mocks={[
+          {
+            request: {
+              query: videosQuery,
+            },
+            error: new Error("500 Internal Server Error"),
+          },
+        ]}
+        addTypename={false}
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+
+    await act(wait);
+
+    expect(getByTestId("errorStateTitle")).toBeDefined();
+  });
 });

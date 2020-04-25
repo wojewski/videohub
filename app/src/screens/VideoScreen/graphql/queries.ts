@@ -25,6 +25,7 @@ interface InputProps {
 export interface Response {
   video: Video;
   loading: boolean;
+  error?: Error;
 }
 
 type Variables = {
