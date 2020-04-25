@@ -65,4 +65,37 @@ describe("VideoScreen", () => {
       video.description
     );
   });
+
+  it("renders ErrorState component if an error happens", async () => {
+    const { getByTestId } = render(
+      <MockedProvider
+        mocks={[
+          {
+            request: {
+              query: videoQuery,
+              variables: {
+                id: video.id,
+              },
+            },
+            error: new Error("500 Internal Server Error"),
+          },
+        ]}
+        addTypename={false}
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="VideoScreen"
+              component={VideoScreen}
+              initialParams={{ id: video.id }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+
+    await act(wait);
+
+    expect(getByTestId("errorStateTitle")).toBeDefined();
+  });
 });
