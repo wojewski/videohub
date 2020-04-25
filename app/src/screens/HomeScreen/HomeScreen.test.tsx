@@ -2,7 +2,7 @@ import React from "react";
 import HomeScreen from "./HomeScreen";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
-import videos from "src/mocks/videos.json";
+import videos from "src/mocks/data/videos.json";
 import { videosQuery } from "./graphql/queries";
 
 import { NavigationContainer } from "@react-navigation/native";

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
-import video from "src/mocks/video.json";
+import video from "src/mocks/data/video.json";
 import { videoQuery } from "./graphql/queries";
 
 import { NavigationContainer } from "@react-navigation/native";

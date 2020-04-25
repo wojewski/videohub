@@ -1,7 +1,7 @@
 import React from "react";
 import VideoTile from "./VideoTile";
 import { render, fireEvent, act, wait } from "@testing-library/react-native";
-import video from "src/mocks/video.json";
+import video from "src/mocks/data/video.json";
 
 describe("videoTile", () => {
   it("renders proper content", async () => {
