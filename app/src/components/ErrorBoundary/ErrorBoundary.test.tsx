@@ -36,7 +36,7 @@ describe("ErrorBoundary", () => {
     expect(getByTestId("children")).toBeDefined();
   });
 
-  it("renders proper component if the error appears", () => {
+  it("renders ErrorState if the error appears", () => {
     const { rerender, getByTestId, debug } = render(boundaryShape);
 
     rerender(
@@ -45,6 +45,6 @@ describe("ErrorBoundary", () => {
       </ErrorBoundary>
     );
 
-    expect(getByTestId("errorStateTitle")).toBeDefined();
+    expect(getByTestId("errorState")).toBeDefined();
   });
 });

@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+import { Text, SafeAreaView, FlatList } from "react-native";
 import { styles } from "./HomeScreen.styles";
-import { Colors } from "src/styles/colors";
 import { withVideos, Response } from "./graphql/queries";
 import VideoTile from "src/components/VideoTile/VideoTile";
 import { useNavigation } from "@react-navigation/native";
 import ErrorState from "src/components/ErrorState/ErrorState";
+import Loader from "src/components/Loader/Loader";
 
 interface Props extends Response {}
 
@@ -13,15 +13,14 @@ function HomeScreen(props: Props) {
   const navigation = useNavigation();
   const { videos, loading, error } = props;
 
-  if (loading && videos && !videos.length) {
-    return (
-      <ActivityIndicator testID="loader" size="large" color={Colors.grey} />
-    );
-  }
-
   if (error) {
     return <ErrorState />;
   }
+
+  if (loading && videos && !videos.length) {
+    return <Loader />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <>

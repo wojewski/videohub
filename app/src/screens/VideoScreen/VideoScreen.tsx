@@ -5,20 +5,19 @@ import { Colors } from "src/styles/colors";
 import { styles } from "./VideoScreen.styles";
 import { withVideo, Response } from "./graphql/queries";
 import ErrorState from "src/components/ErrorState/ErrorState";
+import Loader from "src/components/Loader/Loader";
 
 interface Props extends Response {}
 
 function VideoScreen(props: Props) {
   const { video, loading, error } = props;
 
-  if (loading && !video) {
-    return (
-      <ActivityIndicator testID="loader" size="large" color={Colors.grey} />
-    );
-  }
-
   if (error) {
     return <ErrorState />;
+  }
+
+  if (loading && !video) {
+    return <Loader />;
   }
 
   return (
