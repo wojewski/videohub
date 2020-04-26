@@ -1,12 +1,13 @@
 import React from "react";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
-import video from "src/mocks/video.json";
+import video from "src/mocks/data/video.json";
 import { videoQuery } from "./graphql/queries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import VideoScreen from "./VideoScreen";
+import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
 
 const Stack = createStackNavigator();
 
@@ -31,17 +32,25 @@ const mocks = [
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 
 const shape = (
-  <MockedProvider mocks={mocks} addTypename={false}>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="VideoScreen"
-          component={VideoScreen}
-          initialParams={{ id: video.id }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  </MockedProvider>
+  <BookmarkContext.Provider
+    value={{
+      isBookmarked: jest.fn(),
+      onBookmarkAction: jest.fn(),
+      bookmarks: [],
+    }}
+  >
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="VideoScreen"
+            component={VideoScreen}
+            initialParams={{ id: video.id }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MockedProvider>
+  </BookmarkContext.Provider>
 );
 
 describe("VideoScreen", () => {

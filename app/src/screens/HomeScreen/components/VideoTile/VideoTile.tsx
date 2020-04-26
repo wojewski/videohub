@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   Text,
   View,
@@ -8,25 +8,31 @@ import {
 } from "react-native";
 import { styles } from "./VideoTile.styles";
 import { Video } from "src/types/types";
+import BookmarkButton from "src/components/BookmarkButton/BookmarkButton";
 
 interface Props extends Video {
   onPress: (event: GestureResponderEvent) => void;
 }
 
-export default function VideoTile(props: Props) {
+function VideoTile(props: Props) {
   return (
-    <TouchableOpacity testID="videoTile" onPress={props.onPress}>
-      <View style={styles.tile}>
+    <View style={styles.tile}>
+      <TouchableOpacity testID="videoTile" onPress={props.onPress}>
         <Image
           source={{ uri: props.thumbnail }}
           style={styles.thumbnail}
           resizeMode="cover"
           testID="image"
         />
+      </TouchableOpacity>
+      <View style={styles.details}>
         <Text testID="title" style={styles.title}>
           {props.title}
         </Text>
+        <BookmarkButton id={props.id} size={30} />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
+
+export default memo(VideoTile);

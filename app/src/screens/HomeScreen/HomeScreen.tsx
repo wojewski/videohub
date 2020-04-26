@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, SafeAreaView, FlatList } from "react-native";
 import { styles } from "./HomeScreen.styles";
 import { withVideos, Response } from "./graphql/queries";
-import VideoTile from "src/components/VideoTile/VideoTile";
+import VideoTile from "./components/VideoTile/VideoTile";
 import { useNavigation } from "@react-navigation/native";
 import ErrorState from "src/components/ErrorState/ErrorState";
 import Loader from "src/components/Loader/Loader";
@@ -31,12 +31,12 @@ function HomeScreen(props: Props) {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <VideoTile
+              {...item}
               onPress={() =>
                 navigation.navigate("VideoScreen", {
                   id: item.id,
                 })
               }
-              {...item}
             />
           )}
         />

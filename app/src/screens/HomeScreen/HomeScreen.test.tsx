@@ -2,11 +2,12 @@ import React from "react";
 import HomeScreen from "./HomeScreen";
 import { render, wait, act } from "@testing-library/react-native";
 import { MockedProvider } from "@apollo/react-testing";
-import videos from "src/mocks/videos.json";
+import videos from "src/mocks/data/videos.json";
 import { videosQuery } from "./graphql/queries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
 
 const Stack = createStackNavigator();
 
@@ -26,14 +27,25 @@ const mocks = [
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 
+// In order to silent AsyncStorage source error
+console.error = jest.fn();
+
 const shape = (
-  <MockedProvider mocks={mocks} addTypename={false}>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  </MockedProvider>
+  <BookmarkContext.Provider
+    value={{
+      isBookmarked: jest.fn(),
+      onBookmarkAction: jest.fn(),
+      bookmarks: [],
+    }}
+  >
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MockedProvider>
+  </BookmarkContext.Provider>
 );
 
 describe("HomeScreen", () => {
@@ -47,10 +59,10 @@ describe("HomeScreen", () => {
   });
 
   it("renders properly", async () => {
-    const { queryByTestId } = render(shape);
+    const { getByTestId } = render(shape);
 
     await act(wait);
-    expect(queryByTestId("videoList")).toBeDefined();
+    expect(getByTestId("videoList")).toBeDefined();
   });
 
   it("renders ErrorState component if an error happens", async () => {

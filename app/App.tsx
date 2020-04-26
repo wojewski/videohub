@@ -8,6 +8,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ErrorBoundary from 'src/components/ErrorBoundary/ErrorBoundary';
 import HomeScreen from 'src/screens/HomeScreen/HomeScreen';
 import VideoScreen from 'src/screens/VideoScreen/VideoScreen';
+import useBookmarks, {
+  BookmarkContext,
+} from 'src/hooks/useBookmarks/useBookmarks';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:5000',
@@ -22,20 +25,26 @@ const client = new ApolloClient({
 const Stack = createStackNavigator();
 
 export default function App() {
+  const { isBookmarked, onBookmarkAction, bookmarks } = useBookmarks();
+
   return (
     <ErrorBoundary>
-      <ApolloProvider client={client}>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="VideoScreen" component={VideoScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </ApolloProvider>
+      <BookmarkContext.Provider
+        value={{ isBookmarked, onBookmarkAction, bookmarks }}
+      >
+        <ApolloProvider client={client}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="VideoScreen" component={VideoScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ApolloProvider>
+      </BookmarkContext.Provider>
     </ErrorBoundary>
   );
 }
