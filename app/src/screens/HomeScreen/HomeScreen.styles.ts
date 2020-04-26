@@ -7,12 +7,4 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     justifyContent: "center",
   },
-  text: {
-    fontSize: 30,
-    color: Colors.grey,
-    textAlign: "center",
-    marginTop: 10,
-    marginBottom: 5,
-    fontWeight: "bold",
-  },
 });
