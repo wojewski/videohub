@@ -5,3 +5,9 @@ export interface Video {
   thumbnail: string;
   url: string;
 }
+
+export enum Screens {
+  home = "Home",
+  bookmarks = "Bookmarks",
+  video = "Video",
+}

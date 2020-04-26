@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import useBookmarks, {
-  BookmarkContext,
-} from "src/hooks/useBookmarks/useBookmarks";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
+import { Colors } from "src/styles/colors";
 
 interface Props {
   size: number;
@@ -19,9 +18,9 @@ export default function BookmarkButton(props: Props) {
       onPress={() => onBookmarkAction(isBookmarked(id), id)}
       testID="iconButton"
     >
-      <AntDesign
-        name={isBookmarked(id) ? "heart" : "hearto"}
-        color={isBookmarked(id) ? "red" : "black"}
+      <MaterialCommunityIcons
+        name={isBookmarked(id) ? "bookmark-check" : "bookmark-plus"}
+        color={isBookmarked(id) ? Colors.blue : Colors.grey}
         size={size}
       />
     </TouchableOpacity>
