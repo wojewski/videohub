@@ -1,7 +1,6 @@
 import React from "react";
-import { Text, SafeAreaView, ActivityIndicator } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { Video } from "expo-av";
-import { Colors } from "src/styles/colors";
 import { styles } from "./VideoScreen.styles";
 import { withVideo, Response } from "./graphql/queries";
 import ErrorState from "src/components/ErrorState/ErrorState";

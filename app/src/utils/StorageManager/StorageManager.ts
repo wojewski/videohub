@@ -40,9 +40,7 @@ export default class StorageManager {
     await AsyncStorage.removeItem(this.keyFactory(key));
   };
 
-  public retrieveData = async (
-    key: string
-  ): Promise<string | undefined | null> => {
+  public retrieveData = async (key: string): Promise<string | null> => {
     return await AsyncStorage.getItem(this.keyFactory(key));
   };
 

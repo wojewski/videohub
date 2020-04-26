@@ -26,6 +26,9 @@ const mocks = [
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 
+// In order to silent AsyncStorage source error
+console.error = jest.fn();
+
 const shape = (
   <MockedProvider mocks={mocks} addTypename={false}>
     <NavigationContainer>

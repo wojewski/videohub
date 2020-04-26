@@ -13,10 +13,16 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.grey,
     marginTop: 10,
-    marginLeft: 15,
     fontWeight: "500",
   },
   thumbnail: {
     flex: 1,
+  },
+  details: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
