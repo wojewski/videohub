@@ -31,7 +31,7 @@ function HomeScreen(props: Props) {
 
   const bookmarkedVideos = (): Video[] => {
     return videos
-      ? videos.filter((video) => bookmarks?.includes(video.id))
+      ? videos.filter((video: Video) => bookmarks?.includes(video.id))
       : [];
   };
 
