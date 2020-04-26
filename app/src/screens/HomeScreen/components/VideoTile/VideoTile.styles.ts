@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 10,
     marginBottom: 10,
-    height: 300,
     flex: 1,
   },
   title: {
@@ -17,6 +16,7 @@ export const styles = StyleSheet.create({
   },
   thumbnail: {
     flex: 1,
+    height: 300,
   },
   details: {
     flexDirection: "row",

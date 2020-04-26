@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { TouchableOpacity, GestureResponderEvent } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import useBookmarks, {
+  BookmarkContext,
+} from "src/hooks/useBookmarks/useBookmarks";
 
 interface Props {
-  bookmarked: boolean;
   size: number;
-  onPress: (event: GestureResponderEvent) => void;
+  id: string;
 }
 
 export default function BookmarkButton(props: Props) {
-  const { bookmarked, size, onPress } = props;
-  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
-
-  const onPressAction = (event: GestureResponderEvent) => {
-    setIsBookmarked(!isBookmarked);
-    onPress(event);
-  };
+  const { size, id } = props;
+  const { isBookmarked, onBookmarkAction } = useContext(BookmarkContext);
 
   return (
-    <TouchableOpacity onPress={onPressAction} testID="iconButton">
+    <TouchableOpacity
+      onPress={() => onBookmarkAction(isBookmarked(id), id)}
+      testID="iconButton"
+    >
       <AntDesign
-        name={isBookmarked ? "heart" : "hearto"}
+        name={isBookmarked(id) ? "heart" : "hearto"}
+        color={isBookmarked(id) ? "red" : "black"}
         size={size}
-        color={isBookmarked ? "red" : "black"}
       />
     </TouchableOpacity>
   );

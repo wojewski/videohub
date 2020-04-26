@@ -7,6 +7,7 @@ import { videosQuery } from "./graphql/queries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
 
 const Stack = createStackNavigator();
 
@@ -30,13 +31,21 @@ jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 console.error = jest.fn();
 
 const shape = (
-  <MockedProvider mocks={mocks} addTypename={false}>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  </MockedProvider>
+  <BookmarkContext.Provider
+    value={{
+      isBookmarked: jest.fn(),
+      onBookmarkAction: jest.fn(),
+      bookmarks: [],
+    }}
+  >
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MockedProvider>
+  </BookmarkContext.Provider>
 );
 
 describe("HomeScreen", () => {
@@ -50,10 +59,10 @@ describe("HomeScreen", () => {
   });
 
   it("renders properly", async () => {
-    const { queryByTestId } = render(shape);
+    const { getByTestId } = render(shape);
 
     await act(wait);
-    expect(queryByTestId("videoList")).toBeDefined();
+    expect(getByTestId("videoList")).toBeDefined();
   });
 
   it("renders ErrorState component if an error happens", async () => {
