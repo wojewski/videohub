@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 import {
   Text,
   View,
@@ -14,12 +14,12 @@ interface Props extends Video {
   onPress: (event: GestureResponderEvent) => void;
 }
 
-function VideoTile(props: Props) {
+const VideoTile: FC<Props> = ({ onPress, title, id, thumbnail }) => {
   return (
     <View style={styles.tile}>
-      <TouchableOpacity testID="videoTile" onPress={props.onPress}>
+      <TouchableOpacity testID="videoTileButton" onPress={onPress}>
         <Image
-          source={{ uri: props.thumbnail }}
+          source={{ uri: thumbnail }}
           style={styles.thumbnail}
           resizeMode="cover"
           testID="image"
@@ -27,12 +27,12 @@ function VideoTile(props: Props) {
       </TouchableOpacity>
       <View style={styles.details}>
         <Text testID="title" style={styles.title}>
-          {props.title}
+          {title}
         </Text>
-        <BookmarkButton id={props.id} size={30} />
+        <BookmarkButton id={id} size={30} />
       </View>
     </View>
   );
-}
+};
 
 export default memo(VideoTile);

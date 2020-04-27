@@ -32,7 +32,7 @@ function useBookmarks() {
     id: string
   ): Promise<void> => {
     isBookmarked
-      ? await storageManager.earseGroupItem(Storage.videos, id)
+      ? await storageManager.eraseGroupItem(Storage.videos, id)
       : await storageManager.storeGroupData(Storage.videos, id);
 
     await updateBookmarks();

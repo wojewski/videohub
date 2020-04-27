@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Text, SafeAreaView } from "react-native";
-import { Video } from "expo-av";
 import { styles } from "./VideoScreen.styles";
 import { withVideo, Response } from "./graphql/queries";
 import ErrorState from "src/components/ErrorState/ErrorState";
 import Loader from "src/components/Loader/Loader";
 import BookmarkButton from "src/components/BookmarkButton/BookmarkButton";
+import Video from "src/components/Video/Video";
 
 interface Props extends Response {}
 
@@ -22,16 +22,8 @@ function VideoScreen(props: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Video
-        testID="videoPlayer"
-        source={{
-          uri: video.url,
-        }}
-        resizeMode="contain"
-        style={styles.video}
-        useNativeControls
-        shouldPlay
-      />
+      <Video url={video.url} id={video.id} testID="videoPlayer" />
+
       <Text testID="title" style={styles.title}>
         {video.title}
       </Text>

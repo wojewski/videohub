@@ -28,7 +28,7 @@ describe("videoTile", () => {
   it("fires onPress function on pressing videoTile", () => {
     const { getByTestId } = render(shape);
 
-    fireEvent.press(getByTestId("videoTile"));
+    fireEvent.press(getByTestId("videoTileButton"));
     expect(onPress).toHaveBeenNthCalledWith(1);
   });
 });

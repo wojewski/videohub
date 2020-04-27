@@ -7,9 +7,6 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     justifyContent: "flex-start",
   },
-  video: {
-    height: 250,
-  },
   title: {
     fontSize: 20,
   },
