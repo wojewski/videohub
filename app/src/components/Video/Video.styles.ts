@@ -1,8 +1,9 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { Colors } from "../../styles/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: Colors.black,
   },
   video: {
     width: Dimensions.get("window").width,
@@ -11,10 +12,7 @@ export const styles = StyleSheet.create({
   },
   controlsTop: {
     alignSelf: "flex-end",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
+    padding: 10,
   },
   controlsBottom: {
     flexDirection: "row",
@@ -22,9 +20,5 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 10,
     paddingRight: 10,
-  },
-  poster: {
-    width: 300,
-    height: 300,
   },
 });
