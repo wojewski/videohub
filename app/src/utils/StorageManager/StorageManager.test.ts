@@ -100,7 +100,7 @@ describe("StorageManager", () => {
     });
   });
 
-  describe("earseGroupItem", () => {
+  describe("eraseGroupItem", () => {
     it("passes properly filtered data to storage", async () => {
       const storageManager = new StorageManager();
       const value = "003";
@@ -109,7 +109,7 @@ describe("StorageManager", () => {
         .spyOn(storageManager, "retrieveData")
         .mockImplementation(() => Promise.resolve(mockReturnValues.videos));
 
-      await storageManager.earseGroupItem(key, value);
+      await storageManager.eraseGroupItem(key, value);
 
       expect(AsyncStorage.setItem).toHaveBeenCalledWith(
         storageManager.keyFactory(key),
@@ -119,16 +119,16 @@ describe("StorageManager", () => {
 
     it("does not trigger storeData if retrievedData is undefined", () => {
       const storageManager = new StorageManager();
-      storageManager.earseGroupItem(key, "005");
+      storageManager.eraseGroupItem(key, "005");
 
       expect(AsyncStorage.setItem).not.toHaveBeenCalledWith();
     });
   });
 
-  describe("earseData", () => {
+  describe("eraseData", () => {
     it("triggers AsyncStorage.removeItem with a proper key", () => {
       const storageManager = new StorageManager();
-      storageManager.earseData(key);
+      storageManager.eraseData(key);
 
       expect(AsyncStorage.removeItem).toHaveBeenCalledWith(
         storageManager.keyFactory(key)

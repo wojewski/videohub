@@ -55,7 +55,7 @@ describe("useBookmarks", () => {
       useBookmarks()
     );
 
-    const earseGroupItemSpy = jest.spyOn(storageManager, "earseGroupItem");
+    const earseGroupItemSpy = jest.spyOn(storageManager, "eraseGroupItem");
     const storeGroupDataSpy = jest.spyOn(storageManager, "storeGroupData");
 
     result.current.onBookmarkAction(true, "001");
@@ -70,7 +70,7 @@ describe("useBookmarks", () => {
       useBookmarks()
     );
 
-    const earseGroupItemSpy = jest.spyOn(storageManager, "earseGroupItem");
+    const earseGroupItemSpy = jest.spyOn(storageManager, "eraseGroupItem");
     const storeGroupDataSpy = jest.spyOn(storageManager, "storeGroupData");
 
     result.current.onBookmarkAction(false, "005");

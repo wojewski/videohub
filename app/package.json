@@ -28,6 +28,7 @@
     "apollo-link-http": "^1.5.17",
     "expo": "~37.0.3",
     "expo-av": "~8.1.0",
+    "expo-screen-orientation": "^1.0.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "react": "~16.9.0",

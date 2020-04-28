@@ -23,7 +23,7 @@ export default class StorageManager {
     }
   };
 
-  public earseGroupItem = async (key: string, value: string): Promise<void> => {
+  public eraseGroupItem = async (key: string, value: string): Promise<void> => {
     const retrievedData = await this.retrieveData(key);
 
     if (retrievedData) {
@@ -36,7 +36,7 @@ export default class StorageManager {
     }
   };
 
-  public earseData = async (key: string): Promise<void> => {
+  public eraseData = async (key: string): Promise<void> => {
     await AsyncStorage.removeItem(this.keyFactory(key));
   };
 
