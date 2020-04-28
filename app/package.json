@@ -4,6 +4,9 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json}": [
       "prettier --write"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "tslint"
     ]
   },
   "scripts": {
@@ -14,7 +17,8 @@
     "eject": "expo eject",
     "test": "jest --watch --coverage=false",
     "testFinal": "jest",
-    "devtools": "react-devtools"
+    "devtools": "react-devtools",
+    "lint": "tslint src/**/*.{ts,tsx}"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -56,7 +60,9 @@
     "lint-staged": "^10.1.7",
     "prettier": "^2.0.5",
     "react-devtools": "^4.6.0",
-    "typescript": "~3.8.3"
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
   },
   "jest": {
     "preset": "jest-expo",

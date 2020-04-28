@@ -7,9 +7,7 @@ import Loader from "src/components/Loader/Loader";
 import BookmarkButton from "src/components/BookmarkButton/BookmarkButton";
 import Video from "src/components/Video/Video";
 
-interface Props extends Response {}
-
-function VideoScreen(props: Props) {
+function VideoScreen(props: Response) {
   const { video, loading, error } = props;
 
   if (loading && !video) {

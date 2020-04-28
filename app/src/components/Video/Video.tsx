@@ -46,7 +46,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
     const storagePosition = await storageManager.retrieveData(id);
 
     if (storagePosition && player.current) {
-      await player.current.playFromPositionAsync(parseInt(storagePosition));
+      await player.current.playFromPositionAsync(parseInt(storagePosition, 10));
     }
   }
 
@@ -72,7 +72,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
 
   async function changeOrientation(orientation: Orientation): Promise<void> {
     if (orientation === Orientation.horizontal) {
-      return await ScreenOrientation.lockAsync(
+      return ScreenOrientation.lockAsync(
         ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
       );
     }
@@ -95,8 +95,10 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
     setScreenOrientation(props.fullscreenUpdate);
   }
 
-  async function setScreenOrientation(fullscreenUpdate: number): Promise<void> {
-    if (fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_DID_DISMISS) {
+  async function setScreenOrientation(
+    fullscreenUpdateCode: number
+  ): Promise<void> {
+    if (fullscreenUpdateCode === Video.FULLSCREEN_UPDATE_PLAYER_DID_DISMISS) {
       await changeOrientation(Orientation.vertical);
     }
   }
@@ -126,14 +128,10 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
 
     if (player.current) {
       if (skip === Skip.backward) {
-        return await player.current.setPositionAsync(
-          currentPosition - skipDuration
-        );
+        return player.current.setPositionAsync(currentPosition - skipDuration);
       }
 
-      return await player.current.setPositionAsync(
-        currentPosition + skipDuration
-      );
+      return player.current.setPositionAsync(currentPosition + skipDuration);
     }
   }
 
