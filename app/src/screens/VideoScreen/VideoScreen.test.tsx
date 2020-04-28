@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import VideoScreen from "./VideoScreen";
 import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const Stack = createStackNavigator();
 
@@ -108,6 +109,25 @@ describe("VideoScreen", () => {
 
     await act(wait);
 
-    expect(getByTestId("errorStateTitle")).toBeDefined();
+    expect(getByTestId("errorState")).toBeDefined();
+  });
+
+  it("sets screen orientation to Portrait on mount and unlocks them on unmount", async () => {
+    const lockAsyncSpy = jest.spyOn(ScreenOrientation, "lockAsync");
+    const unlockAsyncSpy = jest.spyOn(ScreenOrientation, "unlockAsync");
+
+    const { unmount } = render(shape);
+
+    await act(wait);
+
+    expect(lockAsyncSpy).toHaveBeenCalledWith(
+      ScreenOrientation.OrientationLock.PORTRAIT_UP
+    );
+
+    unmount();
+
+    await act(wait);
+
+    expect(unlockAsyncSpy).toHaveBeenCalled();
   });
 });

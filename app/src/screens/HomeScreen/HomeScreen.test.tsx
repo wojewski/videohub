@@ -35,7 +35,7 @@ const shape = (
     value={{
       isBookmarked: jest.fn(),
       onBookmarkAction: jest.fn(),
-      bookmarks: [],
+      bookmarks: ["001"],
     }}
   >
     <MockedProvider mocks={mocks} addTypename={false}>
@@ -65,6 +65,66 @@ describe("HomeScreen", () => {
     expect(getByTestId("videoList")).toBeDefined();
   });
 
+  it("renders emptyState if there are no videos", async () => {
+    const mockEmpty = [
+      {
+        request: {
+          query: videosQuery,
+        },
+        result: {
+          data: {
+            videos: [],
+            loading: false,
+          },
+        },
+      },
+    ];
+
+    const { getByTestId } = render(
+      <BookmarkContext.Provider
+        value={{
+          isBookmarked: jest.fn(),
+          onBookmarkAction: jest.fn(),
+          bookmarks: [],
+        }}
+      >
+        <MockedProvider mocks={mockEmpty} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </BookmarkContext.Provider>
+    );
+
+    await act(wait);
+    expect(getByTestId("emptyState")).toBeDefined();
+  });
+
+  it("renders emptyState if there are no bookmarked videos on Bookmarks screen", async () => {
+    const { getByTestId } = render(
+      <BookmarkContext.Provider
+        value={{
+          isBookmarked: jest.fn(),
+          onBookmarkAction: jest.fn(),
+          bookmarks: [],
+        }}
+      >
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="Bookmarks" component={HomeScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </BookmarkContext.Provider>
+    );
+
+    await act(wait);
+    expect(getByTestId("emptyState")).toBeDefined();
+  });
+
   it("renders ErrorState component if an error happens", async () => {
     const { getByTestId } = render(
       <MockedProvider
@@ -88,6 +148,6 @@ describe("HomeScreen", () => {
 
     await act(wait);
 
-    expect(getByTestId("errorStateTitle")).toBeDefined();
+    expect(getByTestId("errorState")).toBeDefined();
   });
 });

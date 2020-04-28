@@ -78,7 +78,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
   async function changeOrientation(orientation: Orientation): Promise<void> {
     if (orientation === Orientation.horizontal) {
       return ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+        ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
       );
     }
 

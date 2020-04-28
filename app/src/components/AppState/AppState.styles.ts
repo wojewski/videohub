@@ -12,4 +12,8 @@ export const styles = StyleSheet.create({
     color: Colors.grey,
     fontWeight: "500",
   },
+  image: {
+    width: 250,
+    height: 150,
+  },
 });

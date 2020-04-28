@@ -39,7 +39,7 @@ describe("Video", () => {
     expect(playerSpy).toHaveBeenCalled();
 
     expect(ScreenOrientationSpy).toHaveBeenCalledWith(
-      ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+      ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
     );
   });
 

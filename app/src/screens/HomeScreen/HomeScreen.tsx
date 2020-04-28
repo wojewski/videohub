@@ -7,7 +7,7 @@ import VideoTile from "./components/VideoTile/VideoTile";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import TopBar from "./components/TopBar/TopBar";
-import ErrorState from "src/components/ErrorState/ErrorState";
+import AppState, { ErrorState } from "src/components/AppState/AppState";
 import Loader from "src/components/Loader/Loader";
 import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
 import { Screens } from "src/types/types";
@@ -21,13 +21,21 @@ const HomeScreen: FC<Props> = ({ videos = [], loading, error }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const { bookmarks } = useContext(BookmarkContext);
+  const routeHome = route.name === Screens.home;
+  const videosList = routeHome
+    ? videos
+    : filterBookmarkedVideos(videos, bookmarks || []);
 
   if (error) {
     return <ErrorState />;
   }
 
-  if (loading && videos && !videos.length) {
+  if (loading) {
     return <Loader />;
+  }
+
+  if (!videos.length || (!routeHome && !videosList.length)) {
+    return <AppState testID="emptyState" title="There's nothing here, yet." />;
   }
 
   return (
@@ -36,11 +44,7 @@ const HomeScreen: FC<Props> = ({ videos = [], loading, error }) => {
       <FlatList
         style={styles.list}
         testID="videoList"
-        data={
-          route.name === Screens.home
-            ? videos
-            : filterBookmarkedVideos(videos, bookmarks || [])
-        }
+        data={videosList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <VideoTile
