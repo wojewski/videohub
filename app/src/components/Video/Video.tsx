@@ -33,6 +33,11 @@ enum Icons {
   forward = "fast-forward-10",
 }
 
+const iconsProperties = {
+  size: 25,
+  color: Colors.white,
+};
+
 const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [currentPosition, setCurrentPosition] = useState(0);
@@ -140,9 +145,8 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
       <View style={styles.controlsTop}>
         <TouchableOpacity onPress={onFullscreen} testID="fullscreenButton">
           <MaterialCommunityIcons
+            {...iconsProperties}
             name={Icons.fullscreen}
-            size={30}
-            color={Colors.blue}
           />
         </TouchableOpacity>
       </View>
@@ -164,18 +168,14 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
           onPress={() => onSkip(Skip.backward)}
           testID="backwardButton"
         >
-          <MaterialCommunityIcons
-            name={Icons.rewind}
-            size={30}
-            color={Colors.blue}
-          />
+          <MaterialCommunityIcons {...iconsProperties} name={Icons.rewind} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handlePlayPause} testID="playButton">
           <MaterialCommunityIcons
+            color={iconsProperties.color}
+            size={35}
             name={isPaused ? Icons.play : Icons.pause}
-            size={50}
-            color={Colors.blue}
           />
         </TouchableOpacity>
 
@@ -183,11 +183,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
           onPress={() => onSkip(Skip.forward)}
           testID="forwardButton"
         >
-          <MaterialCommunityIcons
-            name={Icons.forward}
-            size={30}
-            color={Colors.blue}
-          />
+          <MaterialCommunityIcons {...iconsProperties} name={Icons.forward} />
         </TouchableOpacity>
       </View>
     </View>

@@ -4,25 +4,30 @@ import { Colors } from "src/styles/colors";
 export const styles = StyleSheet.create({
   tile: {
     borderRadius: 20,
-    marginTop: 10,
-    marginBottom: 10,
     flex: 1,
+    marginBottom: 15,
+  },
+  hr: {
+    borderBottomColor: "#ececec",
+    borderBottomWidth: 1,
+    marginBottom: 5,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     color: Colors.grey,
     marginTop: 10,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   thumbnail: {
     flex: 1,
     height: 300,
   },
   details: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     marginLeft: 10,
     marginRight: 10,
+  },
+  top: {
+    alignSelf: "flex-end",
+    marginBottom: 5,
   },
 });

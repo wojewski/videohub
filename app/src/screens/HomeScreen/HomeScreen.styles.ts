@@ -7,4 +7,9 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     justifyContent: "center",
   },
+  list: {
+    marginBottom: 0,
+    padding: 0,
+    flex: 1,
+  },
 });

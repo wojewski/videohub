@@ -7,7 +7,17 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     justifyContent: "flex-start",
   },
+  statusBar: {
+    backgroundColor: Colors.black,
+  },
   title: {
-    fontSize: 20,
+    fontSize: 22,
+    marginBottom: 10,
+  },
+  content: {
+    padding: 10,
+  },
+  action: {
+    alignSelf: "flex-end",
   },
 });
