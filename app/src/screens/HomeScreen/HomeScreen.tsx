@@ -1,43 +1,50 @@
-import React, { useContext } from "react";
-import { SafeAreaView, FlatList } from "react-native";
+import React, { useContext, FC } from "react";
+import { FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./HomeScreen.styles";
 import { withVideos, Response } from "./graphql/queries";
 import VideoTile from "./components/VideoTile/VideoTile";
 import { useNavigation } from "@react-navigation/native";
-import ErrorState from "src/components/ErrorState/ErrorState";
+import { useRoute } from "@react-navigation/native";
+import TopBar from "./components/TopBar/TopBar";
+import AppState, { ErrorState } from "src/components/AppState/AppState";
 import Loader from "src/components/Loader/Loader";
 import { BookmarkContext } from "src/hooks/useBookmarks/useBookmarks";
 import { Screens } from "src/types/types";
 import { filterBookmarkedVideos } from "./utils/filterBookmarkedVideos";
-import { useRoute } from "@react-navigation/native";
 
 interface Props extends Response {
   screenType?: string;
 }
 
-function HomeScreen(props: Props) {
+const HomeScreen: FC<Props> = ({ videos = [], loading, error }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const { bookmarks } = useContext(BookmarkContext);
-  const { videos = [], loading, error } = props;
+  const routeHome = route.name === Screens.home;
+  const videosList = routeHome
+    ? videos
+    : filterBookmarkedVideos(videos, bookmarks || []);
 
   if (error) {
     return <ErrorState />;
   }
 
-  if (loading && videos && !videos.length) {
+  if (loading) {
     return <Loader />;
+  }
+
+  if (!videos.length || (!routeHome && !videosList.length)) {
+    return <AppState testID="emptyState" title="There's nothing here, yet." />;
   }
 
   return (
     <SafeAreaView style={styles.container}>
+      <TopBar />
       <FlatList
+        style={styles.list}
         testID="videoList"
-        data={
-          route.name === Screens.home
-            ? videos
-            : filterBookmarkedVideos(videos, bookmarks || [])
-        }
+        data={videosList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <VideoTile
@@ -52,6 +59,6 @@ function HomeScreen(props: Props) {
       />
     </SafeAreaView>
   );
-}
+};
 
 export default withVideos(HomeScreen);

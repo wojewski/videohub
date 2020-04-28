@@ -20,7 +20,7 @@ function useBookmarks() {
   }, []);
 
   const bookmarksList = async (): Promise<string | null> => {
-    return await storageManager.retrieveData(Storage.videos);
+    return storageManager.retrieveData(Storage.videos);
   };
 
   const isBookmarked = (id: string): boolean => {
@@ -28,10 +28,10 @@ function useBookmarks() {
   };
 
   const onBookmarkAction = async (
-    isBookmarked: boolean,
+    bookmarked: boolean,
     id: string
   ): Promise<void> => {
-    isBookmarked
+    bookmarked
       ? await storageManager.eraseGroupItem(Storage.videos, id)
       : await storageManager.storeGroupData(Storage.videos, id);
 
@@ -49,7 +49,7 @@ export default useBookmarks;
 
 interface Bookmarks {
   isBookmarked: (id: string) => boolean;
-  onBookmarkAction: (isBookmarked: boolean, id: string) => Promise<void>;
+  onBookmarkAction: (bookmarked: boolean, id: string) => Promise<void>;
   bookmarks: string[] | null | undefined;
 }
 

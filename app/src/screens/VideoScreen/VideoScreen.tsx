@@ -1,16 +1,22 @@
-import React from "react";
-import { Text, SafeAreaView } from "react-native";
+import React, { FC, useEffect } from "react";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./VideoScreen.styles";
 import { withVideo, Response } from "./graphql/queries";
-import ErrorState from "src/components/ErrorState/ErrorState";
+import { ErrorState } from "src/components/AppState/AppState";
 import Loader from "src/components/Loader/Loader";
 import BookmarkButton from "src/components/BookmarkButton/BookmarkButton";
 import Video from "src/components/Video/Video";
+import * as ScreenOrientation from "expo-screen-orientation";
 
-interface Props extends Response {}
+const VideoScreen: FC<Response> = ({ video, loading, error }) => {
+  useEffect(() => {
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
-function VideoScreen(props: Props) {
-  const { video, loading, error } = props;
+    return () => {
+      ScreenOrientation.unlockAsync();
+    };
+  }, []);
 
   if (loading && !video) {
     return <Loader />;
@@ -23,15 +29,17 @@ function VideoScreen(props: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <Video url={video.url} id={video.id} testID="videoPlayer" />
-
-      <Text testID="title" style={styles.title}>
-        {video.title}
-      </Text>
-      <Text testID="description">{video.description}</Text>
-
-      <BookmarkButton id={video.id} size={30} />
+      <View style={styles.content}>
+        <View style={styles.action}>
+          <BookmarkButton id={video.id} size={30} />
+        </View>
+        <Text testID="title" style={styles.title}>
+          {video.title}
+        </Text>
+        <Text testID="description">{video.description}</Text>
+      </View>
     </SafeAreaView>
   );
-}
+};
 
 export default withVideo(VideoScreen);

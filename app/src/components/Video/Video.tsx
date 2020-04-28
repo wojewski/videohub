@@ -33,6 +33,11 @@ enum Icons {
   forward = "fast-forward-10",
 }
 
+const iconsProperties = {
+  size: 25,
+  color: Colors.white,
+};
+
 const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [currentPosition, setCurrentPosition] = useState(0);
@@ -46,7 +51,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
     const storagePosition = await storageManager.retrieveData(id);
 
     if (storagePosition && player.current) {
-      await player.current.playFromPositionAsync(parseInt(storagePosition));
+      await player.current.playFromPositionAsync(parseInt(storagePosition, 10));
     }
   }
 
@@ -72,8 +77,8 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
 
   async function changeOrientation(orientation: Orientation): Promise<void> {
     if (orientation === Orientation.horizontal) {
-      return await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
+      return ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
       );
     }
 
@@ -95,8 +100,10 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
     setScreenOrientation(props.fullscreenUpdate);
   }
 
-  async function setScreenOrientation(fullscreenUpdate: number): Promise<void> {
-    if (fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_DID_DISMISS) {
+  async function setScreenOrientation(
+    fullscreenUpdateCode: number
+  ): Promise<void> {
+    if (fullscreenUpdateCode === Video.FULLSCREEN_UPDATE_PLAYER_DID_DISMISS) {
       await changeOrientation(Orientation.vertical);
     }
   }
@@ -126,14 +133,10 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
 
     if (player.current) {
       if (skip === Skip.backward) {
-        return await player.current.setPositionAsync(
-          currentPosition - skipDuration
-        );
+        return player.current.setPositionAsync(currentPosition - skipDuration);
       }
 
-      return await player.current.setPositionAsync(
-        currentPosition + skipDuration
-      );
+      return player.current.setPositionAsync(currentPosition + skipDuration);
     }
   }
 
@@ -142,9 +145,8 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
       <View style={styles.controlsTop}>
         <TouchableOpacity onPress={onFullscreen} testID="fullscreenButton">
           <MaterialCommunityIcons
+            {...iconsProperties}
             name={Icons.fullscreen}
-            size={30}
-            color={Colors.blue}
           />
         </TouchableOpacity>
       </View>
@@ -166,18 +168,14 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
           onPress={() => onSkip(Skip.backward)}
           testID="backwardButton"
         >
-          <MaterialCommunityIcons
-            name={Icons.rewind}
-            size={30}
-            color={Colors.blue}
-          />
+          <MaterialCommunityIcons {...iconsProperties} name={Icons.rewind} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handlePlayPause} testID="playButton">
           <MaterialCommunityIcons
+            color={iconsProperties.color}
+            size={35}
             name={isPaused ? Icons.play : Icons.pause}
-            size={50}
-            color={Colors.blue}
           />
         </TouchableOpacity>
 
@@ -185,11 +183,7 @@ const VideoPlayer: FC<Props> = ({ url, id, testID }) => {
           onPress={() => onSkip(Skip.forward)}
           testID="forwardButton"
         >
-          <MaterialCommunityIcons
-            name={Icons.forward}
-            size={30}
-            color={Colors.blue}
-          />
+          <MaterialCommunityIcons {...iconsProperties} name={Icons.forward} />
         </TouchableOpacity>
       </View>
     </View>

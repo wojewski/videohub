@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import { Colors } from "../../styles/colors";
 
 export const styles = StyleSheet.create({
@@ -6,9 +6,9 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.black,
   },
   video: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").width * (9 / 16),
-    backgroundColor: "black",
+    aspectRatio: 1,
+    width: "100%",
+    backgroundColor: Colors.black,
   },
   controlsTop: {
     alignSelf: "flex-end",
@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingLeft: 10,
-    paddingRight: 10,
+    padding: 10,
   },
 });

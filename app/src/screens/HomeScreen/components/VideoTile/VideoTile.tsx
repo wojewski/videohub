@@ -17,6 +17,10 @@ interface Props extends Video {
 const VideoTile: FC<Props> = ({ onPress, title, id, thumbnail }) => {
   return (
     <View style={styles.tile}>
+      <View style={styles.hr} />
+      <View style={styles.top}>
+        <BookmarkButton id={id} size={30} />
+      </View>
       <TouchableOpacity testID="videoTileButton" onPress={onPress}>
         <Image
           source={{ uri: thumbnail }}
@@ -29,7 +33,6 @@ const VideoTile: FC<Props> = ({ onPress, title, id, thumbnail }) => {
         <Text testID="title" style={styles.title}>
           {title}
         </Text>
-        <BookmarkButton id={id} size={30} />
       </View>
     </View>
   );

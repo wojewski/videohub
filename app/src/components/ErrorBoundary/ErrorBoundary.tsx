@@ -1,5 +1,5 @@
 import React, { ReactNode, PureComponent } from "react";
-import ErrorState from "src/components/ErrorState/ErrorState";
+import { ErrorState } from "src/components/AppState/AppState";
 
 interface Props {
   children: ReactNode;

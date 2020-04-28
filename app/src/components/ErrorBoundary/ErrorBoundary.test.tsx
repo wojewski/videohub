@@ -37,7 +37,7 @@ describe("ErrorBoundary", () => {
   });
 
   it("renders ErrorState if the error appears", () => {
-    const { rerender, getByTestId, debug } = render(boundaryShape);
+    const { rerender, getByTestId } = render(boundaryShape);
 
     rerender(
       <ErrorBoundary>

@@ -7,7 +7,7 @@ export default class StorageManager {
   }
 
   public storeData = async (key: string, value: string): Promise<void> => {
-    return await AsyncStorage.setItem(this.keyFactory(key), value);
+    return AsyncStorage.setItem(this.keyFactory(key), value);
   };
 
   public storeGroupData = async (key: string, value: string): Promise<void> => {
@@ -17,9 +17,9 @@ export default class StorageManager {
       const dataSet = new Set(JSON.parse(retrievedData));
       dataSet.add(value);
 
-      this.storeData(key, JSON.stringify(Array.from(dataSet)));
+      await this.storeData(key, JSON.stringify(Array.from(dataSet)));
     } else {
-      this.storeData(key, JSON.stringify([value]));
+      await this.storeData(key, JSON.stringify([value]));
     }
   };
 
@@ -29,7 +29,7 @@ export default class StorageManager {
     if (retrievedData) {
       const data = JSON.parse(retrievedData);
 
-      this.storeData(
+      await this.storeData(
         key,
         JSON.stringify(data.filter((element: string) => element !== value))
       );
@@ -41,7 +41,7 @@ export default class StorageManager {
   };
 
   public retrieveData = async (key: string): Promise<string | null> => {
-    return await AsyncStorage.getItem(this.keyFactory(key));
+    return AsyncStorage.getItem(this.keyFactory(key));
   };
 
   public keyFactory = (key: string): string => {
