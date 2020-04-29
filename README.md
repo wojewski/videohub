@@ -1,6 +1,6 @@
 # VideoHub
 
-###📹 Simple video listing and video player app requesting data from GraphQL server.
+### 📹 Simple video listing and video player app requesting data from GraphQL server.
 
 ℹ️ In order to test VideoHub App on physical devices please place your `ip address` with `http://` prefix in App.tsx file - in `ipAddress` variable. Like:
 `const ipAddress = 'http://192.168.1.10';`
