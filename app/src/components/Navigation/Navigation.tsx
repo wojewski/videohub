@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, Route } from "@react-navigation/native";
 import HomeScreen from "src/screens/HomeScreen/HomeScreen";
 import VideoScreen from "src/screens/VideoScreen/VideoScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -18,21 +18,25 @@ type RootStackParamList = {
   Video: undefined;
 };
 
+function getNavigationIcon(route: Route<string>, focused: boolean) {
+  if (route.name === Screens.home) {
+    return focused ? "play-circle" : "play-circle-outline";
+  }
+
+  return focused ? "folder-star" : "folder-star-outline";
+}
+
 function MainNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === Screens.home) {
-            iconName = focused ? "play-circle" : "play-circle-outline";
-          } else if (route.name === Screens.bookmarks) {
-            iconName = focused ? "folder-star" : "folder-star-outline";
-          }
-
           return (
-            <MaterialCommunityIcons name={iconName} size={size} color={color} />
+            <MaterialCommunityIcons
+              name={getNavigationIcon(route, focused)}
+              size={size}
+              color={color}
+            />
           );
         },
       })}

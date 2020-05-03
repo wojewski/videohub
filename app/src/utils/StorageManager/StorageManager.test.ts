@@ -33,11 +33,11 @@ jest.mock("react-native", () => ({
   },
 }));
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe("StorageManager", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const key = "videos";
 
   describe("storeData", () => {

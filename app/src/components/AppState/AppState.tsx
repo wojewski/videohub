@@ -24,11 +24,3 @@ const AppState: FC<Props> = memo(({ title, testID, titleTestID }) => {
 });
 
 export default AppState;
-
-export const ErrorState: FC<{}> = () => (
-  <AppState
-    testID="errorState"
-    titleTestID="errorStateTitle"
-    title="Something went wrong!"
-  />
-);

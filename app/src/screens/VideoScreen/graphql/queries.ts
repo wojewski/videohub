@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
-import { graphql, ChildDataProps } from "react-apollo";
+import { ChildDataProps, withQuery } from "react-apollo";
+import { Route } from "react-native";
 import { Video } from "src/types/types";
 
 export const videoQuery = gql`
@@ -34,10 +35,10 @@ type Variables = {
 
 type ChildProps = ChildDataProps<Response>;
 
-export const withVideo = graphql<InputProps, Response, Variables, ChildProps>(
+export const withVideo = withQuery<InputProps, Response, Variables, ChildProps>(
   videoQuery,
   {
-    options: (props) => {
+    options: (props: Route) => {
       return {
         variables: {
           id: props.route.params.id,

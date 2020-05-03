@@ -11,6 +11,9 @@
 **/web-report/
 **/coverage/
 
+**/yarn-error.log
+**/package-lock.json
+
 .idea/
 .vscode/
 

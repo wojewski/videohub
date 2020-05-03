@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import {
   Text,
   View,
@@ -38,4 +38,4 @@ const VideoTile: FC<Props> = ({ onPress, title, id, thumbnail }) => {
   );
 };
 
-export default memo(VideoTile);
+export default VideoTile;

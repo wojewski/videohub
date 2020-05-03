@@ -10,17 +10,12 @@ interface Props {
 function DangerComponent({ shouldThrow }: Props) {
   if (shouldThrow) {
     throw new Error();
-  } else {
-    return null;
   }
+  return null;
 }
 
 beforeAll(() => {
   console.error = jest.fn();
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
 });
 
 const boundaryShape = (

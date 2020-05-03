@@ -20,10 +20,10 @@ const BookmarkButton: FC<Props> = ({ size, id }) => {
       testID="iconButton"
       style={styles.button}
     >
-      {!bookmarked ? (
-        <Text testID="addtext">Add to bookmarks</Text>
-      ) : (
+      {bookmarked ? (
         <Text testID="addedtext">Added</Text>
+      ) : (
+        <Text testID="addtext">Add to bookmarks</Text>
       )}
       <MaterialCommunityIcons
         name={bookmarked ? "bookmark-check" : "bookmark-plus"}

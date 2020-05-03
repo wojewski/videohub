@@ -3,11 +3,12 @@ import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./VideoScreen.styles";
 import { withVideo, Response } from "./graphql/queries";
-import { ErrorState } from "src/components/AppState/AppState";
+import { ErrorState } from "src/components/ErrorState/ErrorState";
 import Loader from "src/components/Loader/Loader";
 import BookmarkButton from "src/components/BookmarkButton/BookmarkButton";
 import Video from "src/components/Video/Video";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { useQuery } from "react-apollo";
 
 const VideoScreen: FC<Response> = ({ video, loading, error }) => {
   useEffect(() => {

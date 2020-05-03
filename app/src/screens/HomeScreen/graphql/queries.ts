@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { graphql, ChildDataProps } from "react-apollo";
+import { withQuery, ChildDataProps } from "react-apollo";
 import { Video } from "src/types/types";
 
 export const videosQuery = gql`
@@ -20,7 +20,7 @@ export interface Response {
 
 type ChildProps = ChildDataProps<Response>;
 
-export const withVideos = graphql(videosQuery, {
+export const withVideos = withQuery(videosQuery, {
   props: ({ data }) => {
     return { ...data } as ChildProps;
   },

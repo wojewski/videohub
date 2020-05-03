@@ -4,13 +4,8 @@ import Video, { storageManager } from "./Video";
 import video from "src/mocks/data/video.json";
 import * as ScreenOrientation from "expo-screen-orientation";
 
-// In order to silent AsyncStorage source error
-console.error = jest.fn();
-
 describe("Video", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+  jest.spyOn(console, "error").mockImplementation(() => {});
 
   const id = "001";
   const shape = <Video id={id} url={video.url} testID="video" />;

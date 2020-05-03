@@ -32,9 +32,6 @@ const mocks = [
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 
-// In order to silent AsyncStorage source error
-console.error = jest.fn();
-
 const shape = (
   <BookmarkContext.Provider
     value={{
@@ -58,6 +55,8 @@ const shape = (
 );
 
 describe("VideoScreen", () => {
+  jest.spyOn(console, "error").mockImplementation(() => {});
+
   it("loader mounts and unmounts properly", async () => {
     const { queryByTestId } = render(shape);
     expect(queryByTestId("loader")).toBeDefined();
