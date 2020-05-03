@@ -1,0 +1,84 @@
+{
+  "name": "app",
+  "main": "node_modules/expo/AppEntry.js",
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "tslint"
+    ]
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest --watch --coverage=false",
+    "testFinal": "jest",
+    "devtools": "react-devtools",
+    "lint": "tslint src/**/*.{ts,tsx}"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "@expo/vector-icons": "^10.0.6",
+    "@react-native-community/masked-view": "0.1.6",
+    "@react-navigation/bottom-tabs": "^5.2.7",
+    "@react-navigation/native": "^5.1.6",
+    "@react-navigation/stack": "^5.2.13",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.17",
+    "expo": "~37.0.3",
+    "expo-av": "~8.1.0",
+    "expo-screen-orientation": "^1.0.0",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
+    "react": "~16.9.0",
+    "react-apollo": "^3.1.5",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.7.0",
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "~2.2.0",
+    "react-native-web": "~0.11.7"
+  },
+  "devDependencies": {
+    "@apollo/react-testing": "^3.1.4",
+    "@babel/core": "^7.8.6",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/react-native": "^5.0.3",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
+    "@types/react": "~16.9.23",
+    "@types/react-native": "~0.61.17",
+    "babel-preset-expo": "~8.1.0",
+    "husky": "^4.2.5",
+    "jest-expo": "^37.0.0",
+    "lint-staged": "^10.1.7",
+    "prettier": "^2.0.5",
+    "react-devtools": "^4.6.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.config.ts"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "private": true
+}
